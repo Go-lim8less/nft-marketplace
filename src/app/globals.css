@@ -1,0 +1,168 @@
+:root {
+  --border-radius-sm: 0.375rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-xl: 1rem;
+  --border-radius-2xl: 1.5rem;
+  
+  /* Light mode colors */
+  --light-bg: #f8f9fa;
+  --light-card: #ffffff;
+  --light-text: #1a202c;
+  --light-text-secondary: #4a5568;
+  --light-border: rgba(226, 232, 240, 0.8);
+  
+  /* Dark mode colors */
+  --dark-bg: #0f1118;
+  --dark-card: #1a1d29;
+  --dark-text: #e2e8f0;
+  --dark-text-secondary: #a0aec0;
+  --dark-border: rgba(45, 55, 72, 0.8);
+  
+  /* Brand colors */
+  --brand-primary: #5c2be6;
+  --brand-secondary: #7547ff;
+  --brand-light: #b397ff;
+}
+
+/* Prevent flash of wrong theme */
+html {
+  visibility: visible;
+  opacity: 1;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-feature-settings: "kern";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark mode initial state to prevent flashing */
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+/* Light mode explicit styling */
+.chakra-ui-light {
+  background-color: var(--light-bg);
+  color: var(--light-text);
+}
+
+/* Media Renderer and Image Styling */
+[data-media-renderer], 
+img,
+.chakra-image,
+.media-renderer,
+.thirdweb-media-renderer {
+  border-radius: inherit;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  object-fit: cover;
+}
+
+/* Image hover effects */
+a:hover [data-media-renderer],
+a:hover img,
+a:hover .chakra-image,
+a:hover .media-renderer,
+a:hover .thirdweb-media-renderer {
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+/* Ensure parent containers control the border-radius */
+[data-media-renderer-container], 
+.media-container,
+.image-container {
+  overflow: hidden; 
+  border-radius: var(--border-radius-lg);
+}
+
+/* Improved card styling */
+.chakra-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.chakra-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Improved button styling */
+.chakra-button {
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+/* Smooth scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 8px;
+  margin: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Dark mode scrollbar */
+.chakra-ui-dark::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+  
+.chakra-ui-dark::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(to right, var(--brand-primary), var(--brand-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Glass morphism effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.chakra-ui-dark .glass-effect {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+} 
