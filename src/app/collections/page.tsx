@@ -50,7 +50,7 @@ export default function CollectionsPage() {
       const query = searchQuery.toLowerCase();
       collections = collections.filter(collection => 
         collection.title?.toLowerCase().includes(query) ||
-        collection.chain.name.toLowerCase().includes(query) ||
+        collection.chain.name?.toLowerCase().includes(query) ||
         collection.type.toLowerCase().includes(query)
       );
     }
@@ -64,8 +64,8 @@ export default function CollectionsPage() {
           ? nameA.localeCompare(nameB)
           : nameB.localeCompare(nameA);
       } else {
-        const chainA = a.chain.name.toLowerCase();
-        const chainB = b.chain.name.toLowerCase();
+        const chainA = a.chain.name?.toLowerCase() || "";
+        const chainB = b.chain.name?.toLowerCase() || "";
         return sortDirection === "asc"
           ? chainA.localeCompare(chainB)
           : chainB.localeCompare(chainA);
@@ -125,7 +125,6 @@ export default function CollectionsPage() {
                 onChange={(e) => setSortBy(e.target.value as "name" | "chain")}
                 borderRadius="lg"
                 w={{ base: "full", md: "160px" }}
-                leftIcon={<FiFilter />}
               >
                 <option value="name">Sort by Name</option>
                 <option value="chain">Sort by Chain</option>
@@ -190,7 +189,7 @@ export default function CollectionsPage() {
                       px={3}
                       py={1}
                     >
-                      {item.chain.name}
+                      {item.chain.name || "Unknown"}
                     </Badge>
                   </Box>
                   <CardBody p={4}>
@@ -215,11 +214,11 @@ export default function CollectionsPage() {
                       {item.description || "Explore this amazing collection of unique digital assets"}
                     </Text>
                     <HStack spacing={2}>
-                      {item.chain.name.toLowerCase().includes("eth") && (
+                      {item.chain.name?.toLowerCase().includes("eth") && (
                         <Icon as={FaEthereum} color="gray.500" />
                       )}
                       <Text fontSize="xs" color="gray.500">
-                        {item.chain.name} • {item.type}
+                        {item.chain.name || "Unknown"} • {item.type}
                       </Text>
                     </HStack>
                   </CardBody>
@@ -252,7 +251,7 @@ export default function CollectionsPage() {
             Supported Blockchains
           </Heading>
           <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={5}>
-            {Array.from(new Set(NFT_CONTRACTS.map(c => c.chain.name))).map(chainName => (
+            {Array.from(new Set(NFT_CONTRACTS.map(c => c.chain.name).filter((name): name is string => !!name))).map(chainName => (
               <HStack 
                 key={chainName} 
                 p={4} 
